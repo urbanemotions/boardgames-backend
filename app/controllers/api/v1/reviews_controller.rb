@@ -1,4 +1,4 @@
-class ReviewsController < ApplicationController
+class Api::V1::ReviewsController < ApplicationController
     
     before_action :get_review, only: [:edit, :update]
 
@@ -9,11 +9,12 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        @review = Review.new(review_params)
+        # review = Review.new(review_params)
+        review = Review.new(content: params[:content])
         if @review.save
-            redirect_to @review
+            render json: review
         else
-            render :new 
+            render json: {error: 'Review was not created'}
         end
     end
 
@@ -21,22 +22,18 @@ class ReviewsController < ApplicationController
     end
 
     def update 
+        # review = Review.find(params[:id])
         if @review.update(review_params)
-            redirect_to @review
+            head :no_content
         else
-            render :edit
+            render json: {error: 'Review was not updated'}
         end
     end
-
-    # def destroy
-    #     @review.destroy
-    #     redirect_to review_path
-    # end
 
     private
 
     def get_review
-        @review = Review.find(params[:id])
+        review = Review.find(params[:id])
     end
 
     def review_params
