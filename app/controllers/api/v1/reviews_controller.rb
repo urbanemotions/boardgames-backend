@@ -1,30 +1,31 @@
 class Api::V1::ReviewsController < ApplicationController
     
-    before_action :get_review, only: [:edit, :update]
+    before_action :get_review, only: [:update]
 
-    def new
-        @review = Review.new 
-        @boardgames = Boardgame.all 
-        @users = User.all 
+    # i need index because i want to show all the reviews with the user name under the boardgame
+    def index
+        reviews = Review.all
+        render json: reviews # , include: [:users]
+    end
+    
+    # i need a show because i want to show all the boardgames on the left hand side of the page 
+    # come back and add to this
+    def show 
+            
     end
 
     def create
-        # review = Review.new(review_params)
-        review = Review.new(content: params[:content])
-        if @review.save
+        review = Review.new(review_params)
+        if review.save
             render json: review
         else
             render json: {error: 'Review was not created'}
         end
     end
 
-    def edit 
-    end
-
     def update 
-        # review = Review.find(params[:id])
-        if @review.update(review_params)
-            head :no_content
+        if review.update(review_params)
+            render json: review
         else
             render json: {error: 'Review was not updated'}
         end

@@ -1,37 +1,31 @@
 class Api::V1::BoardgamesController < ApplicationController
 
-    before_action :get_boardgame, only: [:edit, :update]
+    before_action :get_boardgame, only: [:update]
     
-    # do i need index since we are doing .js files 
+    # i need index because i want to show all the boardgames on the left hand side of the page
     def index
         boardgames = Boardgame.all
         render json: boardgames, include: [:reviews]
     end
-    
-    def new
-        boardgame = Boardgame.new 
+
+    # i need a show because i want to show all the boardgames on the left hand side of the page 
+    # come back and add to this
+    def show 
+        
     end
-    
+
     def create 
-        # @boardgame = Boardgame.new(boardgame_params)
-        # can i use boardgame_params below???????
         boardgame = Boardgame.new(boardgame_params)
-        if @boardgame.save
+        if boardgame.save
             render json: boardgame 
         else
             render json: {error: 'Board Game was not created'}
         end
     end
 
-    def edit
-    end
-
     def update
-        # can i use the private method below?
-        boardgame = Boardgame.find(params[:id])
-        # can i use boardgames params?
         if boardgame.update(boardgame_params)
-            head :no_content # im not sure what this does, why would there be no content?
+            render json: boardgame
         else
             render json: {error: 'Board Game was not updated'}
         end
