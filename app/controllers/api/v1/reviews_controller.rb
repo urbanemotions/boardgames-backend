@@ -1,6 +1,4 @@
 class Api::V1::ReviewsController < ApplicationController
-    
-    before_action :get_review, only: [:update]
 
     # i need index because i want to show all the reviews with the user name under the boardgame
     def index
@@ -8,10 +6,10 @@ class Api::V1::ReviewsController < ApplicationController
         render json: reviews # , include: [:users]
     end
     
-    # i need a show because i want to show all the boardgames on the left hand side of the page 
-    # come back and add to this
+    # i need a show because i want to show all the reviews on the right bottom hand side of the page 
     def show 
-            
+        review = Review.find(params[:id])
+        render json: review            
     end
 
     def create
@@ -24,6 +22,7 @@ class Api::V1::ReviewsController < ApplicationController
     end
 
     def update 
+        review = Review.find(params[:id])
         if review.update(review_params)
             render json: review
         else
@@ -32,10 +31,6 @@ class Api::V1::ReviewsController < ApplicationController
     end
 
     private
-
-    def get_review
-        review = Review.find(params[:id])
-    end
 
     def review_params
         params.require(:review).permit(:content, :user_id, :boardgame_id)
