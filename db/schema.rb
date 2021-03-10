@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_03_08_183629) do
     t.string "name"
     t.string "image_url"
     t.string "theme"
-    t.integer "duration"
+    t.string "duration"
     t.string "num_of_players"
     t.string "age_requirements"
     t.string "description"

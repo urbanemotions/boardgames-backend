@@ -1,6 +1,6 @@
 class Api::V1::BoardgamesController < ApplicationController
 
-    before_action :get_boardgame, only: [:update]
+    before_action :get_boardgame, only: [:show, :update]
     
     # i need index because i want to show all the boardgames on the left hand side of the page
     def index
@@ -8,10 +8,9 @@ class Api::V1::BoardgamesController < ApplicationController
         render json: boardgames, include: [:reviews]
     end
 
-    # i need a show because i want to show all the boardgames on the left hand side of the page 
-    # come back and add to this
+    # i need a show because i want to show all the boardgames on the right hand side of the page 
     def show 
-        
+        render json: @boardgame
     end
 
     def create 
@@ -34,7 +33,7 @@ class Api::V1::BoardgamesController < ApplicationController
     private
 
     def get_boardgame 
-        boardgame = Boardgame.find(params[:id])
+        @boardgame = Boardgame.find(params[:id])
     end
     
     def boardgame_params
