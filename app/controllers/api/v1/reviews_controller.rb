@@ -13,7 +13,8 @@ class Api::V1::ReviewsController < ApplicationController
     end
 
     def create
-        review = Review.new(review_params)
+        # review = Review.new(:content, user_id: 5, :boardgame_id)
+        review = Review.new(content: params[:review], user_id: 5, boardgame_id: params[:boardgameId])
         if review.save
             render json: review
         else
