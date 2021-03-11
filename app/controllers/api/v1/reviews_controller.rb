@@ -17,7 +17,7 @@ class Api::V1::ReviewsController < ApplicationController
         if review.save
             render json: review
         else
-            render json: {error: 'Review was not created'}
+            render json: {error: 'Review Was Not Created'}
         end
     end
 
@@ -26,9 +26,14 @@ class Api::V1::ReviewsController < ApplicationController
         if review.update(review_params)
             render json: review
         else
-            render json: {error: 'Review was not updated'}
+            render json: {error: 'Review Was Not Updated'}
         end
     end
+
+    def destroy
+        Review.find(params[:id]).destroy
+        render json: {error: 'Your Review Has Been Successfully Removed'}
+    end 
 
     private
 
