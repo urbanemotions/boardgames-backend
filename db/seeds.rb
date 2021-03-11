@@ -85,3 +85,4 @@ r2 = Review.create(content: "Worse game I have ever played", user_id: u2.id, boa
 r3 = Review.create(content: "Too time consuming for such a simple game", user_id: u3.id, boardgame_id: b3.id)
 r4 = Review.create(content: "Loved this game, can't wait for the expansion", user_id: u4.id, boardgame_id: b4.id)
 r5 = Review.create(content: "Excellent", user_id: u5.id, boardgame_id: b5.id)
+r6 = Review.create(content: "Epic", user_id: u3.id, boardgame_id: b1.id)
