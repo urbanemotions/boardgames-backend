@@ -32,7 +32,7 @@ class Api::V1::ReviewsController < ApplicationController
 
     def destroy
         Review.find(params[:id]).destroy
-        render json: {error: 'Your Review Has Been Successfully Removed'}
+        render json: {message: 'Your Review Has Been Successfully Removed'}
     end 
 
     private
